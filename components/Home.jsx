@@ -17,32 +17,6 @@ export default function Home() {
     router.reload();
   };
 
-  //   API key: 99a959537352a345ae214a14d1a4c48c
-
-  function getMovies() {
-    useEffect(() => {
-      fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=99a959537352a345ae214a14d1a4c48c&page=${page}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setMoviesData(data.results);
-        });
-    }, []);
-
-    const movies = moviesData.map((movie, i) => {
-      const isLiked = likedMovies.some((mov) => mov === movie.title);
-
-      return (
-        <Movie
-          key={i}
-          {...movie}
-          updateLikedMovies={updateLikedMovies}
-          isLiked={isLiked}
-        />
-      );
-    });
-  }
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=99a959537352a345ae214a14d1a4c48c&page=${page}`
@@ -107,14 +81,6 @@ export default function Home() {
       </div>
       <div className={styles.title}>LAST RELEASES</div>
       <div className={styles.moviesContainer}>{movies}</div>
-      <button
-        onClick={() => {
-          setPage(page + 1);
-          handleRefresh();
-        }}
-      >
-        Next
-      </button>
     </div>
   );
 }
